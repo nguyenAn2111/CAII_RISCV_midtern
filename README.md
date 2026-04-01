@@ -12,4 +12,4 @@ iverilog -o output.vvp *.v
 
 vvp output.vvp 
 
-vvp output.vvp 
+gtkwave wave.vcd
