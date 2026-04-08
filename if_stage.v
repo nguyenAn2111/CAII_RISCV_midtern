@@ -18,6 +18,8 @@ module if_stage (
      .addr(pc),
      .instr(instr)
  );
+ //noi pc tu pc.v vao address cua imem.v , instr tu if_stage.v vao output cua imem.v
+ 
  always @(posedge clk) begin
     if (reset)
         $display("RESET active -> PC = %h", pc);
