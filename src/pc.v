@@ -2,7 +2,7 @@ module pc (
     input clk,
     input reset,
     input [31:0] next_pc,
-    output reg [31:0] pc
+    output reg [31:0] pc // 32 bits PC register
 );
 
 always @(posedge clk or posedge reset) begin

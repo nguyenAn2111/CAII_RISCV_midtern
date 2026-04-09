@@ -1,9 +1,14 @@
 module if_stage (
     input clk,
     input reset,
+
+    input PCsel,
+    input [31:0] branch_target,
+
     output [31:0] instr
 );
  wire [31:0] pc;
+ wire [31:0] pc_plus4;
  wire [31:0] next_pc;
 
  pc pc_inst (
@@ -13,7 +18,15 @@ module if_stage (
      .pc(pc)
  );
 
- assign next_pc = pc + 4; // Simple increment for the next PC, can be modified as needed
+ assign pc_plus4 = pc + 4; 
+
+ mux2 pc_mux (
+     .a(pc_plus4),
+     .b(branch_target),
+     .sel(PCsel),
+     .y(next_pc)
+ );
+ 
  imem imem_inst (
      .addr(pc),
      .instr(instr)
@@ -24,7 +37,7 @@ module if_stage (
     if (reset)
         $display("RESET active -> PC = %h", pc);
     else
-        $display("Time=%0t | PC=%h | next_PC=%h | instruction=%h", 
-                  $time, pc, next_pc, instr);
+        $display("Time=%0t | PC=%h | PC+4=%h | next_PC=%h | PCsel=%b | instr=%h",
+          $time, pc, pc_plus4, next_pc, PCsel, instr);
 end
  endmodule
