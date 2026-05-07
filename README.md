@@ -54,7 +54,7 @@ jal x0, end<br>
 
 # SO DO THIET KE KHOI IF STAGE
 
-![alt text](</doc/KTMT2_Des_IFstage_RISCV (1) (1).jpg>)
+![alt text](</doc/KTMT2_Des_IFstage_RISCV_UPDATED.drawio.png>)
 
 # HUONG_DAN_COMPILE_VA_CHAY
 
