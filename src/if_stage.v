@@ -1,18 +1,20 @@
 module if_stage (
     input clk,
     input reset,
+    input [31:0] pc_current,
 
     input PCsel,
     input [31:0] branch_target,
 
-    output [31:0] instr
+    output [31:0] instr,
+    output [31:0] pc_plus4
 );
  wire [31:0] pc;
- wire [31:0] pc_plus4;
  wire [31:0] next_pc;
 
  pc pc_inst (
      .clk(clk),
+     .pc_current(pc_current),
      .reset(reset),
      .next_pc(next_pc),
      .pc(pc)
@@ -33,11 +35,11 @@ module if_stage (
  );
  //noi pc tu pc.v vao address cua imem.v , instr tu if_stage.v vao output cua imem.v
  
- always @(posedge clk) begin
-    if (reset)
-        $display("RESET active -> PC = %h", pc);
-    else
-        $display("Time=%0t | PC=%h | PC+4=%h | next_PC=%h | PCsel=%b | instr=%h",
-          $time, pc, pc_plus4, next_pc, PCsel, instr);
-end
+//  always @(posedge clk) begin
+//     if (reset)
+//         $display("RESET active -> PC = %h", pc);
+//     else
+//         $display("Time=%0t | PC=%h | PC+4=%h | next_PC=%h | PCsel=%b | instr=%h",
+//           $time, pc, pc_plus4, next_pc, PCsel, instr);
+// end
  endmodule

@@ -1,15 +1,20 @@
 module pc (
     input clk,
     input reset,
+    input [31:0] pc_current,
     input [31:0] next_pc,
     output reg [31:0] pc // 32 bits PC register
 );
 
-always @(posedge clk or posedge reset) begin
-    if (reset)
-        pc <= 32'b0; // Reset PC to 0
-    else
-        pc <= next_pc;
+// always @(posedge clk or posedge reset) begin
+//     if (reset)
+//         pc <= 32'b0; // Reset PC to 0
+//     else
+//         pc <= next_pc;
+// end
+
+always @(*)begin
+    pc = pc_current;
 end
     
 endmodule
